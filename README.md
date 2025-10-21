@@ -1,4 +1,4 @@
-# 🚀 Quy ước Git Workflow cho Dự án
+<!-- # 🚀 Quy ước Git Workflow cho Dự án
 
 ---
 
@@ -26,4 +26,4 @@
 ### 🔄 Luôn cập nhật nhánh `develop` trước khi code
 ```bash
 git checkout develop
-git pull origin develop
+git pull origin develop -->
