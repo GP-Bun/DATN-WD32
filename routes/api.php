@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\CouponController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('orders', OrderController::class);
+    Route::apiResource('coupons', CouponController::class);
+    Route::post('coupons/verify', [CouponController::class, 'verify']);
 });
