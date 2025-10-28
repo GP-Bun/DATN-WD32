@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -12,7 +13,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::query()
+            ->select(['id','name','price','status'])
+            ->get()
+            ->map(function($p){
+                // map status based on stock/variants later; default active
+                return [
+                    'id' => $p->id,
+                    'name' => $p->name,
+                    'price' => (float) $p->price,
+                    'status' => $p->status ?? 'active',
+                ];
+            });
+
+        return response()->json($products);
     }
 
     /**
@@ -28,7 +42,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required','string','max:255'],
+            'price' => ['required','numeric','min:0'],
+            'status' => ['nullable', Rule::in(['active','inactive'])],
+        ]);
+
+        $product = Product::create([
+            'category_id' => 1, // TODO: adjust when category is provided
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $request->input('description'),
+            'status' => $data['status'] ?? 'active',
+        ]);
+
+        return response()->json(['id' => $product->id], 201);
     }
 
     /**
@@ -52,7 +80,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->validate([
+            'name' => ['sometimes','required','string','max:255'],
+            'price' => ['sometimes','required','numeric','min:0'],
+            'status' => ['nullable', Rule::in(['active','inactive'])],
+        ]);
+
+        $product->fill([
+            'name' => $data['name'] ?? $product->name,
+            'price' => $data['price'] ?? $product->price,
+            'description' => $request->input('description', $product->description),
+            'status' => $data['status'] ?? $product->status,
+        ])->save();
+
+        return response()->json(['message' => 'updated']);
     }
 
     /**
@@ -60,6 +101,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return response()->noContent();
     }
 }
