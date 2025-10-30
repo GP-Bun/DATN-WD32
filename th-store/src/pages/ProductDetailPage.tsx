@@ -1,116 +1,193 @@
-import { Link, useParams } from 'react-router-dom'
-import { useState } from 'react'
-import { products } from '../store/mockData'
+import { useParams } from 'react-router-dom'
 import { useCart } from '../store/CartContext'
-import type { ProductVariant } from '../store/mockData'
+import { useState } from 'react'
 
 export default function ProductDetailPage() {
   const { id } = useParams()
-  const product = products.find((p) => String(p.id) === String(id))
-  const { add } = useCart()
-  
-  const [selectedSize, setSelectedSize] = useState<string>('')
-  const [selectedColor, setSelectedColor] = useState<string>('')
+  const { addToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
+  const [selectedColor, setSelectedColor] = useState('black')
+  const [selectedSize, setSelectedSize] = useState('M')
+  const [isAdding, setIsAdding] = useState(false)
 
-  if (!product) {
-    return <p>Không tìm thấy sản phẩm.</p>
+  const product = {
+    id: id,
+    name: 'Áo thun nam cao cấp',
+    price: 299000,
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=400&fit=crop',
+    description: 'Áo thun nam chất liệu cotton 100%, thoáng mát, bền đẹp. Thiết kế đơn giản, dễ phối đồ. Sản phẩm được thiết kế với công nghệ hiện đại, đảm bảo sự thoải mái tối đa cho người mặc.',
+    colors: [
+      { name: 'Đen', value: 'black', hex: '#000000' },
+      { name: 'Trắng', value: 'white', hex: '#ffffff' },
+      { name: 'Xanh dương', value: 'blue', hex: '#3b82f6' },
+      { name: 'Đỏ', value: 'red', hex: '#ef4444' }
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    stock: 50,
+    rating: 4.8,
+    reviews: 128
   }
 
-  const availableColors = [...new Set(product.variants.map(v => v.color))]
-  const availableSizes = [...new Set(product.variants.map(v => v.size))]
-  
-  const selectedVariant = product.variants.find(v => 
-    v.size === selectedSize && v.color === selectedColor
-  )
-
-  const handleAddToCart = () => {
-    if (!selectedVariant) {
-      alert('Vui lòng chọn size và màu sắc')
-      return
+  const handleAddToCart = async () => {
+    setIsAdding(true)
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    addToCart({
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity,
+      color: selectedColor,
+      size: selectedSize
+    })
+    
+    setIsAdding(false)
+    
+    // Show success animation
+    const button = document.querySelector('.add-to-cart-btn')
+    if (button) {
+      button.classList.add('success-animation')
+      setTimeout(() => {
+        button.classList.remove('success-animation')
+      }, 2000)
     }
-    if (quantity > selectedVariant.stock) {
-      alert('Số lượng vượt quá tồn kho')
-      return
-    }
-    add(product, selectedVariant, quantity)
-    alert('Đã thêm vào giỏ hàng!')
   }
 
   return (
-    <>
-      <div className="back-link-bar">
-        <Link to="/san-pham" className="back-link">
-          ← Trở lại trang sản phẩm
-        </Link>
-      </div>
-      <section className="product-detail">
-        <img src={product.image} alt={product.name} />
-        <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="price">{product.price.toLocaleString('vi-VN')}đ</p>
-          <p>{product.description}</p>
+    <div className="main">
+      <div className="product-detail-container">
+        <div className="product-detail">
+          <div className="product-image-section">
+            <div className="product-image-wrapper">
+              <img src={product.image} alt={product.name} className="product-main-image" />
+              <div className="image-overlay">
+                <span className="zoom-hint">🔍 Hover để phóng to</span>
+              </div>
+            </div>
+          </div>
           
-          {/* Color Selection */}
-          <div className="variant-section">
-            <h3>Màu sắc:</h3>
-            <div className="color-options">
-              {availableColors.map(color => (
-                <button
-                  key={color}
-                  className={`color-btn ${selectedColor === color ? 'selected' : ''}`}
-                  onClick={() => setSelectedColor(color)}
+          <div className="product-info-section">
+            <div className="product-header">
+              <h1 className="product-title">{product.name}</h1>
+              <div className="product-rating">
+                <div className="stars">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className={i < Math.floor(product.rating) ? 'star filled' : 'star'}>⭐</span>
+                  ))}
+                </div>
+                <span className="rating-text">{product.rating}/5 ({product.reviews} đánh giá)</span>
+              </div>
+            </div>
+            
+            <div className="product-price-section">
+              <span className="current-price">{product.price.toLocaleString('vi-VN')}đ</span>
+              <span className="original-price">399.000đ</span>
+              <span className="discount-badge">-25%</span>
+            </div>
+            
+            <div className="product-description">
+              <p>{product.description}</p>
+            </div>
+            
+            <div className="variant-section">
+              <h3 className="variant-title">Màu sắc</h3>
+              <div className="color-options">
+                {product.colors.map(color => (
+                  <button
+                    key={color.value}
+                    className={`color-option ${selectedColor === color.value ? 'selected' : ''}`}
+                    onClick={() => setSelectedColor(color.value)}
+                    style={{ backgroundColor: color.hex }}
+                    title={color.name}
+                  >
+                    <span className="color-name">{color.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="variant-section">
+              <h3 className="variant-title">Kích thước</h3>
+              <div className="size-options">
+                {product.sizes.map(size => (
+                  <button
+                    key={size}
+                    className={`size-option ${selectedSize === size ? 'selected' : ''}`}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="quantity-section">
+              <h3 className="variant-title">Số lượng</h3>
+              <div className="quantity-controls">
+                <button 
+                  className="quantity-btn"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  disabled={quantity <= 1}
                 >
-                  {color}
+                  −
                 </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Size Selection */}
-          <div className="variant-section">
-            <h3>Size:</h3>
-            <div className="size-options">
-              {availableSizes.map(size => (
-                <button
-                  key={size}
-                  className={`size-btn ${selectedSize === size ? 'selected' : ''}`}
-                  onClick={() => setSelectedSize(size)}
+                <span className="quantity-display">{quantity}</span>
+                <button 
+                  className="quantity-btn"
+                  onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                  disabled={quantity >= product.stock}
                 >
-                  {size}
+                  +
                 </button>
-              ))}
+              </div>
+              <p className="stock-info">
+                <span className="stock-icon">📦</span>
+                Còn {product.stock} sản phẩm
+              </p>
+            </div>
+
+            <div className="action-buttons">
+              <button 
+                className={`add-to-cart-btn ${isAdding ? 'loading' : ''}`}
+                onClick={handleAddToCart}
+                disabled={isAdding}
+              >
+                {isAdding ? (
+                  <>
+                    <span className="loading-spinner"></span>
+                    Đang thêm...
+                  </>
+                ) : (
+                  <>
+                    🛒 Thêm vào giỏ hàng
+                  </>
+                )}
+              </button>
+              
+              <button className="buy-now-btn">
+                💳 Mua ngay
+              </button>
+            </div>
+
+            <div className="product-features">
+              <div className="feature-item">
+                <span className="feature-icon">🚚</span>
+                <span>Miễn phí vận chuyển</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">🔄</span>
+                <span>Đổi trả trong 30 ngày</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-icon">🛡️</span>
+                <span>Bảo hành 12 tháng</span>
+              </div>
             </div>
           </div>
-
-          {/* Quantity Selection */}
-          <div className="variant-section">
-            <h3>Số lượng:</h3>
-            <div className="quantity-controls">
-              <button 
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                disabled={quantity <= 1}
-              >-</button>
-              <span>{quantity}</span>
-              <button 
-                onClick={() => setQuantity(quantity + 1)}
-                disabled={!selectedVariant || quantity >= selectedVariant.stock}
-              >+</button>
-            </div>
-            {selectedVariant && (
-              <p className="stock-info">Còn lại: {selectedVariant.stock} sản phẩm</p>
-            )}
-          </div>
-
-          <button 
-            onClick={handleAddToCart} 
-            className="add-to-cart"
-            disabled={!selectedVariant}
-          >
-            Thêm vào giỏ
-          </button>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   )
 }

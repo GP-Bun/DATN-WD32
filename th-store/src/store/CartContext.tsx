@@ -1,17 +1,23 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
-import type { Product, ProductVariant } from './mockData'
 
 export type CartItem = { 
-  product: Product
-  variant: ProductVariant
+  id: string
+  name: string
+  price: number
+  image: string
   quantity: number
+  color?: string
+  size?: string
 }
+
 type CartContextValue = {
   items: CartItem[]
-  add: (product: Product, variant: ProductVariant, quantity?: number) => void
-  remove: (productId: number, variant: ProductVariant) => void
-  clear: () => void
-  total: number
+  addToCart: (item: Omit<CartItem, 'id'>) => void
+  removeFromCart: (id: string) => void
+  updateQuantity: (id: string, quantity: number) => void
+  clearCart: () => void
+  getTotalPrice: () => number
+  getTotalItems: () => number
 }
 
 const CartContext = createContext<CartContextValue | null>(null)
@@ -25,42 +31,56 @@ export function useCart() {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
 
-  const add = (product: Product, variant: ProductVariant, quantity = 1) => {
+  const addToCart = (item: Omit<CartItem, 'id'>) => {
+    const id = `${item.name}-${item.color || 'default'}-${item.size || 'default'}`
+    
     setItems((prev) => {
-      const existing = prev.find((i) => 
-        i.product.id === product.id && 
-        i.variant.size === variant.size && 
-        i.variant.color === variant.color
-      )
+      const existing = prev.find((i) => i.id === id)
       if (existing) {
         return prev.map((i) =>
-          i.product.id === product.id && 
-          i.variant.size === variant.size && 
-          i.variant.color === variant.color
-            ? { ...i, quantity: i.quantity + quantity }
+          i.id === id
+            ? { ...i, quantity: i.quantity + item.quantity }
             : i
         )
       }
-      return [...prev, { product, variant, quantity }]
+      return [...prev, { ...item, id }]
     })
   }
 
-  const remove = (productId: number, variant: ProductVariant) => {
-    setItems((prev) => prev.filter((i) => 
-      !(i.product.id === productId && 
-        i.variant.size === variant.size && 
-        i.variant.color === variant.color)
+  const removeFromCart = (id: string) => {
+    setItems((prev) => prev.filter((i) => i.id !== id))
+  }
+
+  const updateQuantity = (id: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(id)
+      return
+    }
+    
+    setItems((prev) => prev.map((i) =>
+      i.id === id ? { ...i, quantity } : i
     ))
   }
 
-  const clear = () => setItems([])
+  const clearCart = () => setItems([])
 
-  const total = useMemo(
-    () => items.reduce((sum, i) => sum + i.product.price * i.quantity, 0),
-    [items]
-  )
+  const getTotalPrice = () => {
+    return items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  }
 
-  const value = useMemo(() => ({ items, add, remove, clear, total }), [items, total])
+  const getTotalItems = () => {
+    return items.reduce((sum, item) => sum + item.quantity, 0)
+  }
+
+  const value = useMemo(() => ({ 
+    items, 
+    addToCart, 
+    removeFromCart, 
+    updateQuantity, 
+    clearCart, 
+    getTotalPrice, 
+    getTotalItems 
+  }), [items])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
