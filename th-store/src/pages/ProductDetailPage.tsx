@@ -12,17 +12,17 @@ export default function ProductDetailPage() {
 
   const product = {
     id: id,
-    name: 'Áo thun nam cao cấp',
-    price: 299000,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=400&fit=crop',
-    description: 'Áo thun nam chất liệu cotton 100%, thoáng mát, bền đẹp. Thiết kế đơn giản, dễ phối đồ. Sản phẩm được thiết kế với công nghệ hiện đại, đảm bảo sự thoải mái tối đa cho người mặc.',
+    name: 'Giày Sneaker TH Runner',
+    price: 1299000,
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=400&fit=crop',
+    description: 'Giày chạy bộ cao cấp với đế cao su chống trượt và công nghệ đệm khí hiện đại. Thiết kế nhẹ, thoáng khí, phù hợp cho mọi hoạt động thể thao. Chất liệu da cao cấp, bền đẹp theo thời gian. Sản phẩm được thiết kế với công nghệ hiện đại, đảm bảo sự thoải mái tối đa cho đôi chân.',
     colors: [
       { name: 'Đen', value: 'black', hex: '#000000' },
       { name: 'Trắng', value: 'white', hex: '#ffffff' },
       { name: 'Xanh dương', value: 'blue', hex: '#3b82f6' },
       { name: 'Đỏ', value: 'red', hex: '#ef4444' }
     ],
-    sizes: ['S', 'M', 'L', 'XL'],
+    sizes: ['39', '40', '41', '42', '43'],
     stock: 50,
     rating: 4.8,
     reviews: 128

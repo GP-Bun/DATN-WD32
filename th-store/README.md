@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Mở trình duyệt tới `http://localhost:5173`.
+Mở trình duyệt tới `http://localhost:5000`.
 
 ## Các trang
 - Trang chủ: `/`
