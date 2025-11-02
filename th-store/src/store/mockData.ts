@@ -16,8 +16,8 @@ export type Product = {
 export const products: Product[] = [
   {
     id: 1,
-    name: 'TH Runner 1',
-    description: 'Giày chạy bộ nhẹ, êm ái cho mọi hành trình.',
+    name: 'Giày Sneaker TH Runner',
+    description: 'Giày chạy bộ nhẹ, êm ái cho mọi hành trình. Đế cao su chống trượt, đệm khí công nghệ cao.',
     price: 1299000,
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop',
     variants: [
@@ -33,10 +33,10 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    name: 'TH Street 2',
-    description: 'Sneaker phong cách đường phố, cá tính.',
-    price: 1499000,
-    image: 'https://images.unsplash.com/photo-1526178613601-1c46ae744074?q=80&w=1200&auto=format&fit=crop',
+    name: 'Giày Thể Thao TH Sport',
+    description: 'Sneaker phong cách đường phố, cá tính. Thiết kế hiện đại, phù hợp mọi hoạt động thể thao.',
+    price: 1599000,
+    image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200&auto=format&fit=crop',
     variants: [
       { size: '39', color: 'Xanh Navy', stock: 8 },
       { size: '40', color: 'Xanh Navy', stock: 12 },
@@ -50,10 +50,10 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    name: 'TH Classic 3',
-    description: 'Thiết kế cổ điển, phù hợp mọi outfit.',
-    price: 999000,
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
+    name: 'Giày Chạy Bộ TH Run',
+    description: 'Thiết kế cổ điển, phù hợp mọi outfit. Công nghệ đệm khí, thoáng khí tối đa.',
+    price: 1399000,
+    image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1200&auto=format&fit=crop',
     variants: [
       { size: '39', color: 'Nâu', stock: 6 },
       { size: '40', color: 'Nâu', stock: 10 },
