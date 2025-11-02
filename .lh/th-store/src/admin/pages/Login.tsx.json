@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/admin/pages/Login.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969987704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969987704,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { useNavigate } from 'react-router-dom';\nimport { useAuth } from '../../store/AuthContext';\n\nconst AdminLogin = () => {\n  const { loginAdmin } = useAuth();\n  const navigate = useNavigate();\n\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [isLoading, setIsLoading] = useState(false);\n  const [error, setError] = useState('');\n\n  const handleSubmit = async (e: React.FormEvent) => {\n    e.preventDefault();\n    setIsLoading(true);\n    setError('');\n\n    try {\n      await loginAdmin(email, password);\n      navigate('/admin');\n    } catch (err: any) {\n      setError(err.general || 'Đăng nhập thất bại!');\n    } finally {\n      setIsLoading(false);\n    }\n  };\n\n  return (\n    <div className=\"admin-login-container\">\n      <div className=\"admin-login-card\">\n        <h2 className=\"admin-login-title\">Đăng nhập Admin</h2>\n        {error && <div className=\"form-error\">{error}</div>}\n        <form onSubmit={handleSubmit} className=\"admin-login-form\">\n          <input\n            type=\"email\"\n            placeholder=\"Email\"\n            className=\"admin-login-input\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            required\n          />\n          <input\n            type=\"password\"\n            placeholder=\"Mật khẩu\"\n            className=\"admin-login-input\"\n            value={password}\n            onChange={(e) => setPassword(e.target.value)}\n            required\n          />\n          <button type=\"submit\" className=\"admin-login-btn\" disabled={isLoading}>\n            {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}\n          </button>\n        </form>\n        <p>\n          Chưa có tài khoản? <a href=\"/admin/register\">Đăng ký ngay</a>\n        </p>\n      </div>\n    </div>\n  );\n};\n\nexport default AdminLogin;\n"
+        }
+    ]
+}

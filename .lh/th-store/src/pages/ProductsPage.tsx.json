@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/pages/ProductsPage.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969744734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969744734,
+            "name": "Commit-0",
+            "content": "import { Link } from 'react-router-dom'\n\nexport default function ProductsPage() {\n  const products = [\n    { id: 1, name: 'Áo thun nam', price: 299000, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=200&fit=crop' },\n    { id: 2, name: 'Quần jean nữ', price: 599000, image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=300&h=200&fit=crop' },\n    { id: 3, name: 'Giày thể thao', price: 1299000, image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=200&fit=crop' },\n    { id: 4, name: 'Túi xách nữ', price: 899000, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop' },\n    { id: 5, name: 'Đồng hồ nam', price: 1999000, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=200&fit=crop' },\n    { id: 6, name: 'Áo khoác nữ', price: 1299000, image: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=300&h=200&fit=crop' },\n  ]\n\n  return (\n    <div className=\"main\">\n      <h1>Sản phẩm</h1>\n      <div className=\"grid\">\n        {products.map(product => (\n          <div key={product.id} className=\"card\">\n            <img src={product.image} alt={product.name} />\n            <h3>{product.name}</h3>\n            <p className=\"price\">{product.price.toLocaleString('vi-VN')}đ</p>\n            <Link to={`/san-pham/${product.id}`}>Xem chi tiết</Link>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

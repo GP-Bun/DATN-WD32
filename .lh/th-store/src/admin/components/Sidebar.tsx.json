@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/admin/components/Sidebar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969971903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969971903,
+            "name": "Commit-0",
+            "content": "import { NavLink } from \"react-router-dom\";\n\nconst Sidebar = () => {\n  const menu = [\n    { name: \"Dashboard\", path: \"/admin\", icon: \"📊\" },\n    { name: \"Sản phẩm\", path: \"/admin/products\", icon: \"📦\" },\n    { name: \"Đơn hàng\", path: \"/admin/orders\", icon: \"📋\" },\n    { name: \"Người dùng\", path: \"/admin/users\", icon: \"👥\" },\n  ];\n\n  return (\n    <div className=\"admin-sidebar\">\n      <div className=\"admin-sidebar-header\">\n        <h2>TH Store Admin</h2>\n      </div>\n      <nav className=\"admin-sidebar-nav\">\n        {menu.map((item) => (\n          <NavLink\n            key={item.path}\n            to={item.path}\n            className={({ isActive }) =>\n              `admin-nav-item ${isActive ? \"active\" : \"\"}`\n            }\n          >\n            <span style={{ marginRight: \"12px\" }}>{item.icon}</span>\n            {item.name}\n          </NavLink>\n        ))}\n      </nav>\n    </div>\n  );\n};\n\nexport default Sidebar;\n"
+        }
+    ]
+}

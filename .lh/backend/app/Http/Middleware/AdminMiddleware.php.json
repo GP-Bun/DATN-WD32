@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/app/Http/Middleware/AdminMiddleware.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761971814895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761971814895,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Middleware;\n\nuse Closure;\nuse Illuminate\\Http\\Request;\n\nclass AdminMiddleware\n{\n    public function handle(Request $request, Closure $next)\n    {\n        $admin = $request->user(); // token đã xác thực\n        if ($admin) return $next($request);\n\n        return response()->json(['message' => 'Chỉ admin mới truy cập được'], 403);\n    }\n}\n"
+        }
+    ]
+}

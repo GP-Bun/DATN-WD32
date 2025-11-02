@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/database/migrations/2025_10_23_153258_create_order_items_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969315935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969315935,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('order_items', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('order_id')->constrained()->onDelete('cascade');\n            $table->foreignId('product_id')->constrained()->onDelete('cascade');\n            $table->foreignId('variant_id')->nullable()->constrained('product_variants')->onDelete('set null');\n            $table->integer('quantity');\n            $table->decimal('price', 10, 2);\n            $table->timestamps();\n            $table->softDeletes();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('order_items');\n    }php artisan migrate:fresh --seed\n\n};\n"
+        }
+    ]
+}

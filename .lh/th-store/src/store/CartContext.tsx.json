@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/store/CartContext.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969680606,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969680606,
+            "name": "Commit-0",
+            "content": "import React, { createContext, useContext, useMemo, useState } from 'react'\n\nexport type CartItem = { \n  id: string\n  name: string\n  price: number\n  image: string\n  quantity: number\n  color?: string\n  size?: string\n}\n\ntype CartContextValue = {\n  items: CartItem[]\n  addToCart: (item: Omit<CartItem, 'id'>) => void\n  removeFromCart: (id: string) => void\n  updateQuantity: (id: string, quantity: number) => void\n  clearCart: () => void\n  getTotalPrice: () => number\n  getTotalItems: () => number\n}\n\nconst CartContext = createContext<CartContextValue | null>(null)\n\nexport function useCart() {\n  const ctx = useContext(CartContext)\n  if (!ctx) throw new Error('useCart must be used within CartProvider')\n  return ctx\n}\n\nexport function CartProvider({ children }: { children: React.ReactNode }) {\n  const [items, setItems] = useState<CartItem[]>([])\n\n  const addToCart = (item: Omit<CartItem, 'id'>) => {\n    const id = `${item.name}-${item.color || 'default'}-${item.size || 'default'}`\n    \n    setItems((prev) => {\n      const existing = prev.find((i) => i.id === id)\n      if (existing) {\n        return prev.map((i) =>\n          i.id === id\n            ? { ...i, quantity: i.quantity + item.quantity }\n            : i\n        )\n      }\n      return [...prev, { ...item, id }]\n    })\n  }\n\n  const removeFromCart = (id: string) => {\n    setItems((prev) => prev.filter((i) => i.id !== id))\n  }\n\n  const updateQuantity = (id: string, quantity: number) => {\n    if (quantity <= 0) {\n      removeFromCart(id)\n      return\n    }\n    \n    setItems((prev) => prev.map((i) =>\n      i.id === id ? { ...i, quantity } : i\n    ))\n  }\n\n  const clearCart = () => setItems([])\n\n  const getTotalPrice = () => {\n    return items.reduce((sum, item) => sum + (item.price * item.quantity), 0)\n  }\n\n  const getTotalItems = () => {\n    return items.reduce((sum, item) => sum + item.quantity, 0)\n  }\n\n  const value = useMemo(() => ({ \n    items, \n    addToCart, \n    removeFromCart, \n    updateQuantity, \n    clearCart, \n    getTotalPrice, \n    getTotalItems \n  }), [items])\n\n  return <CartContext.Provider value={value}>{children}</CartContext.Provider>\n}\n\n\n"
+        }
+    ]
+}

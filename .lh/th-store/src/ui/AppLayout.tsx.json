@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/ui/AppLayout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969639116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969639116,
+            "name": "Commit-0",
+            "content": "import { Link, NavLink, Outlet } from 'react-router-dom'\nimport { useAuth } from '../store/AuthContext'\n\nexport default function AppLayout() {\n  const { user, logoutUser } = useAuth()\n  return (\n    <div className=\"app-container\">\n      <header className=\"header\">\n        <div className=\"brand\">\n          <Link to=\"/\">TH</Link>\n        </div>\n        <nav className=\"nav\">\n          <NavLink to=\"/\">Trang chủ</NavLink>\n          <NavLink to=\"/san-pham\">Sản phẩm</NavLink>\n          <NavLink to=\"/gio-hang\">Giỏ hàng</NavLink>\n          <NavLink to=\"/thanh-toan\">Thanh toán</NavLink>\n          {user ? (\n            <button\n              onClick={async () => {\n                await logoutUser()\n                alert('Đăng xuất thành công!')\n              }}\n              \n            >\n              Đăng xuất ({user.name})\n            </button>\n          ) : (\n            <>\n              <NavLink to=\"/dang-nhap\">Đăng nhập</NavLink>\n              <NavLink to=\"/dang-ky\">Đăng ký</NavLink>\n            </>\n          )}\n        </nav>\n      </header>\n      <main className=\"main\">\n        <Outlet />\n      </main>\n      <footer className=\"footer\">\n        <p>© {new Date().getFullYear()} TH Sneaker Store</p>\n      </footer>\n    </div>\n  )\n}\n\n\n"
+        }
+    ]
+}

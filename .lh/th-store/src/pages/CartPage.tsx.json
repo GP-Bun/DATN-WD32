@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/pages/CartPage.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969699295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969699295,
+            "name": "Commit-0",
+            "content": "import { useCart } from '../store/CartContext'\nimport { Link } from 'react-router-dom'\n\nexport default function CartPage() {\n  const { items, removeFromCart, updateQuantity, clearCart, getTotalPrice } = useCart()\n\n  if (items.length === 0) {\n    return (\n      <div className=\"main\">\n        <h1>Giỏ hàng</h1>\n        <p>Giỏ hàng của bạn đang trống</p>\n        <Link to=\"/san-pham\">Tiếp tục mua sắm</Link>\n      </div>\n    )\n  }\n\n  return (\n    <div className=\"main\">\n      <h1>Giỏ hàng</h1>\n      <div className=\"cart-items\">\n        {items.map(item => (\n          <div key={`${item.id}-${item.color}-${item.size}`} className=\"cart-item\">\n            <img src={item.image} alt={item.name} className=\"cart-item-image\" />\n            <div className=\"cart-item-info\">\n              <h3>{item.name}</h3>\n              <p>Màu: {item.color}</p>\n              <p>Size: {item.size}</p>\n            </div>\n            <div className=\"cart-item-price\">\n              <p>{item.price.toLocaleString('vi-VN')}đ</p>\n              <div className=\"quantity-controls\">\n                <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>\n                <span>{item.quantity}</span>\n                <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>\n              </div>\n              <button className=\"remove-btn\" onClick={() => removeFromCart(item.id)}>\n                Xóa\n              </button>\n            </div>\n          </div>\n        ))}\n      </div>\n      \n      <div className=\"cart-summary\">\n        <div className=\"cart-total\">\n          Tổng cộng: {getTotalPrice().toLocaleString('vi-VN')}đ\n        </div>\n        <div className=\"cart-actions\">\n          <button className=\"clear-btn\" onClick={clearCart}>\n            Xóa tất cả\n          </button>\n          <Link to=\"/thanh-toan\" className=\"checkout-btn\">\n            Thanh toán\n          </Link>\n        </div>\n      </div>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

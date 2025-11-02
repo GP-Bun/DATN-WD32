@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/admin/components/Navbar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969965225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969965225,
+            "name": "Commit-0",
+            "content": "import { useNavigate } from 'react-router-dom'\n\nconst Navbar = () => {\n  const navigate = useNavigate()\n\n  const handleLogout = () => {\n    navigate('/admin/login')\n  }\n\n  return (\n    <div className=\"admin-navbar\">\n      <h1>TH Store Admin</h1>\n      <div className=\"admin-navbar-user\">\n        <span>Xin chào, Admin! 👋</span>\n        <button \n          onClick={handleLogout}\n          className=\"admin-logout-btn\"\n        >\n          Đăng xuất\n        </button>\n      </div>\n    </div>\n  )\n}\n\nexport default Navbar\n  "
+        }
+    ]
+}

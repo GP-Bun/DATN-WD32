@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/admin/pages/Orders.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969994264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969994264,
+            "name": "Commit-0",
+            "content": "\nconst Orders = () => {\n  return (\n    <div>\n      <div className=\"admin-page-header\">\n        <h1 className=\"admin-page-title\">Quản lý đơn hàng</h1>\n        <p className=\"admin-page-subtitle\">Theo dõi và quản lý tất cả đơn hàng của khách hàng</p>\n      </div>\n      \n      <div className=\"admin-card\">\n        <div className=\"admin-card-header\">\n          <h3 className=\"admin-card-title\">Danh sách đơn hàng</h3>\n          <button className=\"admin-btn\">Xuất báo cáo</button>\n        </div>\n        <div className=\"admin-card-content\">\n          <table className=\"admin-table\">\n            <thead>\n              <tr>\n                <th>Mã đơn</th>\n                <th>Khách hàng</th>\n                <th>Tổng tiền</th>\n                <th>Trạng thái</th>\n                <th>Ngày tạo</th>\n                <th>Hành động</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td>#001</td>\n                <td>Nguyễn Văn A</td>\n                <td>1,500,000đ</td>\n                <td><span style={{color: '#10b981'}}>Đã giao</span></td>\n                <td>2024-01-15</td>\n                <td>\n                  <button className=\"admin-btn\" style={{padding: '6px 12px', fontSize: '0.8rem'}}>Xem chi tiết</button>\n                </td>\n              </tr>\n              <tr>\n                <td>#002</td>\n                <td>Trần Thị B</td>\n                <td>899,000đ</td>\n                <td><span style={{color: '#f59e0b'}}>Đang xử lý</span></td>\n                <td>2024-01-16</td>\n                <td>\n                  <button className=\"admin-btn\" style={{padding: '6px 12px', fontSize: '0.8rem'}}>Xem chi tiết</button>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default Orders\n  "
+        }
+    ]
+}

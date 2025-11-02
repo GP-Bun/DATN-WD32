@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/main.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969619933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969619933,
+            "name": "Commit-0",
+            "content": "import React from 'react'\nimport { createRoot } from 'react-dom/client'\nimport { createBrowserRouter, RouterProvider } from 'react-router-dom'\nimport TestApiPage from \"./pages/TestApi\"\n\nimport './style.css'\n\nimport AppLayout from './ui/AppLayout'\nimport AdminLayout from './admin/AdminLayout'\nimport { \n  HomePage, \n  ProductsPage, \n  ProductDetailPage, \n  CartPage, \n  CheckoutPage, \n  LoginPage, \n  RegisterPage \n} from './pages'\n\nimport Dashboard from './admin/pages/Dashboard'\nimport AdminProducts from './admin/pages/Products'\nimport AdminOrders from './admin/pages/Orders'\nimport AdminUsers from './admin/pages/Users'\nimport AdminLogin from './admin/pages/Login'\nimport AdminRegister from './admin/pages/Register'\n\nimport { CartProvider } from './store/CartContext'\nimport { AuthProvider } from './store/AuthContext'\n\nconst router = createBrowserRouter([\n  {\n    path: '/',\n    element: <AppLayout />,\n    children: [\n      { index: true, element: <HomePage /> },\n      { path: 'san-pham', element: <ProductsPage /> },\n      { path: 'san-pham/:id', element: <ProductDetailPage /> },\n      { path: 'gio-hang', element: <CartPage /> },\n      { path: 'thanh-toan', element: <CheckoutPage /> },\n      { path: 'dang-nhap', element: <LoginPage /> },\n      { path: 'dang-ky', element: <RegisterPage /> },\n      { path: 'test-api', element: <TestApiPage /> },\n    ],\n  },\n  {\n    path: '/admin',\n    element: <AdminLayout />,\n    children: [\n      { index: true, element: <Dashboard /> },\n      { path: 'products', element: <AdminProducts /> },\n      { path: 'orders', element: <AdminOrders /> },\n      { path: 'users', element: <AdminUsers /> },\n    ],\n  },\n  {\n    path: '/admin/login',\n    element: <AdminLogin />,\n  },\n  {\n    path: '/admin/register',\n    element: <AdminRegister />,\n  },\n])\n\nconst rootElement = document.getElementById('root')!\ncreateRoot(rootElement).render(\n  <React.StrictMode>\n    <AuthProvider>\n      <CartProvider>\n        <RouterProvider router={router} />\n      </CartProvider>\n    </AuthProvider>\n  </React.StrictMode>\n)\n"
+        }
+    ]
+}

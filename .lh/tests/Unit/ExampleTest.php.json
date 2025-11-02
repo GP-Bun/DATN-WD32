@@ -1,0 +1,22 @@
+{
+    "sourceFile": "tests/Unit/ExampleTest.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1761822204997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1761822505552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,5 +15,5 @@\n         $response = $this->get('/');\n \n         $response->assertStatus(200);\n     }\n-}\n\\ No newline at end of file\n+} \n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1761822204997,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Tests\\Feature;\n\n// use Illuminate\\Foundation\\Testing\\RefreshDatabase;\nuse Tests\\TestCase;\n\nclass ExampleTest extends TestCase\n{\n    /**\n     * A basic test example.\n     */\n    public function test_the_application_returns_a_successful_response(): void\n    {\n        $response = $this->get('/');\n\n        $response->assertStatus(200);\n    }\n}"
+        }
+    ]
+}

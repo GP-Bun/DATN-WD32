@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/store/mockData.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969689219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969689219,
+            "name": "Commit-0",
+            "content": "export type ProductVariant = {\n  size: string\n  color: string\n  stock: number\n}\n\nexport type Product = {\n  id: number\n  name: string\n  description: string\n  price: number\n  image: string\n  variants: ProductVariant[]\n}\n\nexport const products: Product[] = [\n  {\n    id: 1,\n    name: 'TH Runner 1',\n    description: 'Giày chạy bộ nhẹ, êm ái cho mọi hành trình.',\n    price: 1299000,\n    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop',\n    variants: [\n      { size: '39', color: 'Đen', stock: 10 },\n      { size: '40', color: 'Đen', stock: 15 },\n      { size: '41', color: 'Đen', stock: 8 },\n      { size: '42', color: 'Đen', stock: 12 },\n      { size: '39', color: 'Trắng', stock: 5 },\n      { size: '40', color: 'Trắng', stock: 7 },\n      { size: '41', color: 'Trắng', stock: 3 },\n      { size: '42', color: 'Trắng', stock: 6 },\n    ]\n  },\n  {\n    id: 2,\n    name: 'TH Street 2',\n    description: 'Sneaker phong cách đường phố, cá tính.',\n    price: 1499000,\n    image: 'https://images.unsplash.com/photo-1526178613601-1c46ae744074?q=80&w=1200&auto=format&fit=crop',\n    variants: [\n      { size: '39', color: 'Xanh Navy', stock: 8 },\n      { size: '40', color: 'Xanh Navy', stock: 12 },\n      { size: '41', color: 'Xanh Navy', stock: 6 },\n      { size: '42', color: 'Xanh Navy', stock: 9 },\n      { size: '39', color: 'Đỏ', stock: 4 },\n      { size: '40', color: 'Đỏ', stock: 7 },\n      { size: '41', color: 'Đỏ', stock: 5 },\n      { size: '42', color: 'Đỏ', stock: 8 },\n    ]\n  },\n  {\n    id: 3,\n    name: 'TH Classic 3',\n    description: 'Thiết kế cổ điển, phù hợp mọi outfit.',\n    price: 999000,\n    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',\n    variants: [\n      { size: '39', color: 'Nâu', stock: 6 },\n      { size: '40', color: 'Nâu', stock: 10 },\n      { size: '41', color: 'Nâu', stock: 8 },\n      { size: '42', color: 'Nâu', stock: 11 },\n      { size: '39', color: 'Xám', stock: 3 },\n      { size: '40', color: 'Xám', stock: 5 },\n      { size: '41', color: 'Xám', stock: 4 },\n      { size: '42', color: 'Xám', stock: 7 },\n    ]\n  },\n]\n\n\n"
+        }
+    ]
+}

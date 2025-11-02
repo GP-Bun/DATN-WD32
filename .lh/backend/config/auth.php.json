@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/config/auth.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761973028128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761973028128,
+            "name": "Commit-0",
+            "content": "<?php\n\nreturn [\n\n    'defaults' => [\n        'guard' => 'web',\n        'passwords' => 'users',\n    ],\n\n    'guards' => [\n        'web' => [\n            'driver' => 'session',\n            'provider' => 'users',\n        ],\n\n        'admin' => [\n            'driver' => 'session',\n            'provider' => 'admins',\n        ],\n\n        'api' => [\n            'driver' => 'sanctum',\n            'provider' => 'users',\n        ],\n    ],\n\n    'providers' => [\n        'users' => [\n            'driver' => 'eloquent',\n            'model' => App\\Models\\User::class,\n        ],\n\n        'admins' => [\n            'driver' => 'eloquent',\n            'model' => App\\Models\\Admin::class,\n        ],\n    ],\n\n    'passwords' => [\n        'users' => [\n            'provider' => 'users',\n            'table' => 'password_reset_tokens',\n            'expire' => 60,\n            'throttle' => 60,\n        ],\n\n        'admins' => [\n            'provider' => 'admins',\n            'table' => 'admin_password_reset_tokens',\n            'expire' => 60,\n            'throttle' => 60,\n        ],\n    ],\n\n    'password_timeout' => 10800,\n];\n"
+        }
+    ]
+}

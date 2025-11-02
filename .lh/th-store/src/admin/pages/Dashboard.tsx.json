@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/admin/pages/Dashboard.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969981066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969981066,
+            "name": "Commit-0",
+            "content": "\nconst Dashboard = () => {\n  return (\n    <div>\n      <div className=\"admin-page-header\">\n        <h1 className=\"admin-page-title\">Tổng quan hệ thống</h1>\n        <p className=\"admin-page-subtitle\">Chào mừng bạn đến với trang quản trị TH Store 👋</p>\n      </div>\n      \n      <div className=\"admin-stats-grid\">\n        <div className=\"admin-stat-card\">\n          <h3 className=\"admin-stat-title\">Tổng sản phẩm</h3>\n          <p className=\"admin-stat-value blue\">156</p>\n        </div>\n        <div className=\"admin-stat-card\">\n          <h3 className=\"admin-stat-title\">Đơn hàng hôm nay</h3>\n          <p className=\"admin-stat-value green\">23</p>\n        </div>\n        <div className=\"admin-stat-card\">\n          <h3 className=\"admin-stat-title\">Khách hàng</h3>\n          <p className=\"admin-stat-value purple\">1,234</p>\n        </div>\n        <div className=\"admin-stat-card\">\n          <h3 className=\"admin-stat-title\">Doanh thu tháng</h3>\n          <p className=\"admin-stat-value orange\">45.2M</p>\n        </div>\n      </div>\n\n      <div className=\"admin-card\">\n        <div className=\"admin-card-header\">\n          <h3 className=\"admin-card-title\">Hoạt động gần đây</h3>\n          <button className=\"admin-btn\">Xem tất cả</button>\n        </div>\n        <div className=\"admin-card-content\">\n          <p>Đây là nơi hiển thị các hoạt động gần đây của hệ thống...</p>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default Dashboard\n  "
+        }
+    ]
+}

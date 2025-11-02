@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/routes/api.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761970146730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761970146730,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Route;\nuse App\\Http\\Controllers\\AuthController;\nuse App\\Http\\Controllers\\Admin\\AuthController as AdminAuthController;\n\n/*\n|--------------------------------------------------------------------------\n| API Routes\n|--------------------------------------------------------------------------\n| Tất cả các route ở đây sẽ được truy cập qua đường dẫn bắt đầu bằng /api\n| Ví dụ: http://127.0.0.1:8000/api/test\n|--------------------------------------------------------------------------\n*/\n\n//  Route kiểm tra kết nối API\nRoute::get('/test', function () {\n    return response()->json(['message' => 'API OK!']);\n});\n\n//  Route test public (không cần đăng nhập)\nRoute::get('/products', function () {\n    return response()->json([\n        ['id' => 1, 'name' => 'Nike Air Force 1', 'price' => 3200000],\n        ['id' => 2, 'name' => 'Adidas Superstar', 'price' => 2800000],\n        ['id' => 3, 'name' => 'Converse Chuck Taylor', 'price' => 1500000],\n    ]);\n});\n\n// Đăng ký và đăng nhập (public routes)\nRoute::post('/register', [AuthController::class, 'register']);\nRoute::post('/login', [AuthController::class, 'login']);\n\n//  Các route cần đăng nhập (bảo vệ bằng Sanctum)\nRoute::middleware('auth:sanctum')->group(function () {\n    Route::get('/user-profile', function (Request $request) {\n        return response()->json([\n            'message' => 'Lấy thông tin người dùng thành công!',\n            'user' => $request->user()\n        ]);\n    });\n\n    Route::post('/user-profile', [AuthController::class, 'updateProfile']);\n    Route::post('/logout', [AuthController::class, 'logout']);\n});\n\n// Admin Routes\n\nRoute::prefix('admin')->group(function () {\n    // Admin register & login\n    Route::post('register', [AdminAuthController::class, 'register']);\n    Route::post('login', [AdminAuthController::class, 'login']);\n\n    // Admin routes cần login\n    Route::middleware(['auth:sanctum', 'admin'])->group(function () {\n        Route::post('logout', [AdminAuthController::class, 'logout']);\n        Route::get('dashboard', function () {\n            return ['message' => 'Chào mừng Admin!'];\n        });\n\n        // Thêm các route admin khác ở đây (Orders, Products, Users...)\n    });\n});\n\n\n"
+        }
+    ]
+}

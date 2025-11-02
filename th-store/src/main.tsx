@@ -1,6 +1,8 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import TestApiPage from "./pages/TestApi"
+
 import './style.css'
 
 import AppLayout from './ui/AppLayout'
@@ -14,11 +16,14 @@ import {
   LoginPage, 
   RegisterPage 
 } from './pages'
+
 import Dashboard from './admin/pages/Dashboard'
 import AdminProducts from './admin/pages/Products'
 import AdminOrders from './admin/pages/Orders'
 import AdminUsers from './admin/pages/Users'
 import AdminLogin from './admin/pages/Login'
+import AdminRegister from './admin/pages/Register'
+
 import { CartProvider } from './store/CartContext'
 import { AuthProvider } from './store/AuthContext'
 
@@ -34,6 +39,7 @@ const router = createBrowserRouter([
       { path: 'thanh-toan', element: <CheckoutPage /> },
       { path: 'dang-nhap', element: <LoginPage /> },
       { path: 'dang-ky', element: <RegisterPage /> },
+      { path: 'test-api', element: <TestApiPage /> },
     ],
   },
   {
@@ -49,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: '/admin/login',
     element: <AdminLogin />,
+  },
+  {
+    path: '/admin/register',
+    element: <AdminRegister />,
   },
 ])
 

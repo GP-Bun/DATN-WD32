@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/pages/TestApi.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761969898932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761969898932,
+            "name": "Commit-0",
+            "content": "import React, { useEffect } from \"react\";\r\nimport api from \"../api\";\r\n\r\nconst TestApi: React.FC = () => {\r\n  useEffect(() => {\r\n    api.get(\"/user-profile\")\r\n      .then((res) => {\r\n        console.log(\"✅ Kết nối thành công:\", res.data);\r\n      })\r\n      .catch((err) => {\r\n        console.error(\"❌ Lỗi kết nối:\", err);\r\n      });\r\n  }, []);\r\n\r\n  return (\r\n    <div style={{ padding: 20 }}>\r\n      <h1>Kiểm tra kết nối API Laravel</h1>\r\n      <p>Mở console (F12 → Console) để xem kết quả.</p>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TestApi;\r\n"
+        }
+    ]
+}

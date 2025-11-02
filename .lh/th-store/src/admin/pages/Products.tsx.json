@@ -1,0 +1,18 @@
+{
+    "sourceFile": "th-store/src/admin/pages/Products.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761970000517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761970000517,
+            "name": "Commit-0",
+            "content": "\nconst Products = () => {\n  return (\n    <div>\n      <div className=\"admin-page-header\">\n        <h1 className=\"admin-page-title\">Quản lý sản phẩm</h1>\n        <p className=\"admin-page-subtitle\">Quản lý danh sách sản phẩm, thêm/sửa/xóa sản phẩm</p>\n      </div>\n      \n      <div className=\"admin-card\">\n        <div className=\"admin-card-header\">\n          <h3 className=\"admin-card-title\">Danh sách sản phẩm</h3>\n          <button className=\"admin-btn\">+ Thêm sản phẩm mới</button>\n        </div>\n        <div className=\"admin-card-content\">\n          <table className=\"admin-table\">\n            <thead>\n              <tr>\n                <th>ID</th>\n                <th>Tên sản phẩm</th>\n                <th>Giá</th>\n                <th>Trạng thái</th>\n                <th>Hành động</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr>\n                <td>001</td>\n                <td>Áo thun nam</td>\n                <td>299,000đ</td>\n                <td><span style={{color: '#10b981'}}>Còn hàng</span></td>\n                <td>\n                  <button className=\"admin-btn\" style={{marginRight: '8px', padding: '6px 12px', fontSize: '0.8rem'}}>Sửa</button>\n                  <button className=\"admin-btn-secondary\" style={{padding: '6px 12px', fontSize: '0.8rem'}}>Xóa</button>\n                </td>\n              </tr>\n              <tr>\n                <td>002</td>\n                <td>Quần jean nữ</td>\n                <td>599,000đ</td>\n                <td><span style={{color: '#10b981'}}>Còn hàng</span></td>\n                <td>\n                  <button className=\"admin-btn\" style={{marginRight: '8px', padding: '6px 12px', fontSize: '0.8rem'}}>Sửa</button>\n                  <button className=\"admin-btn-secondary\" style={{padding: '6px 12px', fontSize: '0.8rem'}}>Xóa</button>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default Products\n  "
+        }
+    ]
+}

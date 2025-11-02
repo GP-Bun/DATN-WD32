@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/app/Http/Controllers/Admin/AuthController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761970378056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761970378056,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse App\\Http\\Controllers\\Controller;\nuse Illuminate\\Http\\Request;\nuse App\\Models\\Admin;\nuse Illuminate\\Support\\Facades\\Hash;\n\nclass AuthController extends Controller\n{\n    // Đăng ký Admin\n    public function register(Request $request)\n    {\n        $request->validate([\n            'name' => 'required|string|max:255',\n            'email' => 'required|email|unique:admins,email',\n            'password' => 'required|string|min:6',\n        ]);\n\n        $admin = Admin::create([\n            'name' => $request->name,\n            'email' => $request->email,\n            'password' => Hash::make($request->password),\n        ]);\n\n        return response()->json(['admin' => $admin], 201);\n    }\n\n    // Đăng nhập Admin\n    public function login(Request $request)\n    {\n        $request->validate([\n            'email' => 'required|email',\n            'password' => 'required|string',\n        ]);\n\n        $admin = Admin::where('email', $request->email)->first();\n\n        if (!$admin || !Hash::check($request->password, $admin->password)) {\n            return response()->json(['message' => 'Email hoặc mật khẩu không đúng'], 401);\n        }\n\n        // Tạo token bằng Sanctum\n        $token = $admin->createToken('admin_token')->plainTextToken;\n\n        return response()->json([\n            'access_token' => $token,\n            'token_type' => 'Bearer',\n            'admin' => $admin\n        ]);\n    }\n\n    // Logout\n    public function logout(Request $request)\n    {\n        $request->user()->currentAccessToken()->delete();\n        return response()->json(['message' => 'Đăng xuất thành công']);\n    }\n}\n"
+        }
+    ]
+}

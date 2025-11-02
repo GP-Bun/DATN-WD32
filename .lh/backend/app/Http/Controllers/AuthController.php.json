@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/app/Http/Controllers/AuthController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761970311591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761970311591,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse App\\Models\\User;\nuse Illuminate\\Support\\Facades\\Hash;\nuse Illuminate\\Support\\Facades\\Validator;\n\nclass AuthController extends Controller\n{\n    // Đăng ký\n    public function register(Request $request)\n    {\n        $validator = Validator::make($request->all(), [\n            'name' => 'required|string|max:255',\n            'email' => 'required|string|email|max:255|unique:users',\n            'password' => 'required|string|min:6',\n        ]);\n\n        if ($validator->fails()) {\n            return response()->json($validator->errors(), 422);\n        }\n\n        $user = User::create([\n            'name' => $request->name,\n            'email' => $request->email,\n            'password' => Hash::make($request->password),\n        ]);\n\n        return response()->json(['message' => 'Đăng ký thành công', 'user' => $user]);\n    }\n\n    // Đăng nhập\n    public function login(Request $request)\n    {\n        $request->validate([\n            'email' => 'required|email',\n            'password' => 'required'\n        ]);\n\n        $user = User::where('email', $request->email)->first();\n\n        if (!$user || !Hash::check($request->password, $user->password)) {\n            return response()->json(['message' => 'Sai tài khoản hoặc mật khẩu'], 401);\n        }\n\n        // Tạo token mới cho user\n        $token = $user->createToken('auth_token')->plainTextToken;\n\n        return response()->json([\n            'message' => 'Đăng nhập thành công!',\n            'user' => $user,\n            'token' => $token,\n        ]);\n    }\n\n    // Cập nhật thông tin người dùng\n    public function updateProfile(Request $request)\n    {\n        $user = $request->user(); // lấy user từ token\n\n        // Validate dữ liệu gửi lên\n        $request->validate([\n            'name' => 'required|string|max:255',\n            'email' => 'required|email|unique:users,email,' . $user->id,\n            // bạn có thể thêm các trường khác, ví dụ 'phone', 'address', ...\n        ]);\n\n        // Cập nhật thông tin user\n        $user->update([\n            'name' => $request->name,\n            'email' => $request->email,\n            // các trường khác nếu cần\n        ]);\n\n        return response()->json([\n            'message' => 'Cập nhật thông tin thành công!',\n            'user' => $user\n        ]);\n    }\n\n    // Đăng xuất user \n    public function logout(Request $request)\n    {\n        $request->user()->currentAccessToken()->delete();\n\n        return response()->json([\n            'message' => 'Đăng xuất thành công!'\n        ]);\n    }\n}\n"
+        }
+    ]
+}

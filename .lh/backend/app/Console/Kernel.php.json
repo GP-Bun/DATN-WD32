@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/app/Console/Kernel.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1761970076942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1761970076942,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Console;\n\nuse Illuminate\\Console\\Scheduling\\Schedule;\nuse Illuminate\\Foundation\\Console\\Kernel as ConsoleKernel;\n\nclass Kernel extends ConsoleKernel\n{\n    /**\n     * Define the application's command schedule.\n     */\n    protected function schedule(Schedule $schedule): void\n    {\n        // $schedule->command('inspire')->hourly();\n    }\n\n    /**\n     * Register the commands for the application.\n     */\n    protected function commands(): void\n    {\n        $this->load(__DIR__.'/Commands');\n\n        require base_path('routes/console.php');\n    }\n}\n"
+        }
+    ]
+}
