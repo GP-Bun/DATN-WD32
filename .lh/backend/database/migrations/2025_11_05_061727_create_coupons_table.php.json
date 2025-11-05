@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/database/migrations/2025_11_05_061727_create_coupons_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762323724604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762324587468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,12 +10,16 @@\n     {\n         Schema::create('coupons', function (Blueprint $table) {\n             $table->id();\n             $table->string('code')->unique();\n-            $table->decimal('discount_amount', 10, 2)->nullable();\n-            $table->integer('discount_percent')->nullable();\n+            $table->string('type'); // percent or fixed\n+            $table->decimal('value', 15, 2);\n+            $table->decimal('min_order_amount', 15, 2)->nullable();\n+            $table->decimal('max_discount', 15, 2)->nullable();\n+            $table->date('start_date')->nullable();\n+            $table->date('end_date')->nullable();\n             $table->integer('usage_limit')->nullable();\n-            $table->timestamp('expires_at')->nullable();\n+            $table->boolean('active')->default(true);\n             $table->timestamps();\n         });\n     }\n \n"
+                }
+            ],
+            "date": 1762323724604,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('coupons', function (Blueprint $table) {\n            $table->id();\n            $table->string('code')->unique();\n            $table->decimal('discount_amount', 10, 2)->nullable();\n            $table->integer('discount_percent')->nullable();\n            $table->integer('usage_limit')->nullable();\n            $table->timestamp('expires_at')->nullable();\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('coupons');\n    }\n};\n"
+        }
+    ]
+}

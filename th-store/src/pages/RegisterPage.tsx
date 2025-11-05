@@ -41,8 +41,28 @@ export default function RegisterPage() {
       alert('Đăng ký thành công! Vui lòng đăng nhập.')
       navigate('/dang-nhap')
     } catch (error: any) {
-      if (typeof error === 'object') setErrors(error)
-      else setErrors({ general: 'Đăng ký thất bại!' })
+      // ✅ Xử lý lỗi từ Laravel hoặc Axios
+      if (error.response) {
+        const status = error.response.status
+        const data = error.response.data
+        const newErrors: FormErrors = {}
+
+        if (status === 422) {
+          if (data.email) newErrors.email = 'Email đã được sử dụng!'
+          if (data.name) newErrors.name = 'Tên không hợp lệ!'
+          if (data.password) newErrors.password = 'Mật khẩu không hợp lệ!'
+          if (Object.keys(newErrors).length === 0)
+            newErrors.general = 'Vui lòng kiểm tra lại thông tin đăng ký!'
+        } else {
+          newErrors.general = data.message || 'Đăng ký thất bại!'
+        }
+
+        setErrors(newErrors)
+      } else if (error.request) {
+        setErrors({ general: 'Không thể kết nối đến máy chủ!' })
+      } else {
+        setErrors({ general: 'Đăng ký thất bại! Vui lòng thử lại.' })
+      }
     } finally {
       setIsLoading(false)
     }
@@ -62,7 +82,10 @@ export default function RegisterPage() {
 
         <div className="auth-form-container">
           <div className="auth-form-header">
-            <div className="auth-logo"><div className="logo-icon">🛍️</div><span>TH Store</span></div>
+            <div className="auth-logo">
+              <div className="logo-icon">🛍️</div>
+              <span>TH Store</span>
+            </div>
             <h1>Chào mừng bạn đến với TH Store!</h1>
           </div>
 
@@ -71,21 +94,46 @@ export default function RegisterPage() {
 
             <div className="form-group">
               <label htmlFor="name">Họ và tên</label>
-              <input id="name" name="name" type="text" placeholder="Nhập họ và tên của bạn" required className="form-input"/>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Nhập họ và tên của bạn"
+                required
+                className="form-input"
+              />
               {errors.name && <div className="form-error">{errors.name}</div>}
             </div>
 
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="Nhập email của bạn" required className="form-input"/>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Nhập email của bạn"
+                required
+                className="form-input"
+              />
               {errors.email && <div className="form-error">{errors.email}</div>}
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Mật khẩu</label>
               <div className="password-input">
-                <input id="password" name="password" type={showPassword ? 'text':'password'} placeholder="Tạo mật khẩu mạnh" required className="form-input"/>
-                <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Tạo mật khẩu mạnh"
+                  required
+                  className="form-input"
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? '👁️' : '👁️‍🗨️'}
                 </button>
               </div>
@@ -95,31 +143,64 @@ export default function RegisterPage() {
             <div className="form-group">
               <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
               <div className="password-input">
-                <input id="confirmPassword" name="confirmPassword" type={showConfirmPassword ? 'text':'password'} placeholder="Nhập lại mật khẩu" required className="form-input"/>
-                <button type="button" className="password-toggle" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder="Nhập lại mật khẩu"
+                  required
+                  className="form-input"
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
                   {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
                 </button>
               </div>
-              {errors.confirmPassword && <div className="form-error">{errors.confirmPassword}</div>}
+              {errors.confirmPassword && (
+                <div className="form-error">{errors.confirmPassword}</div>
+              )}
             </div>
 
             <div className="form-options">
               <label className="checkbox-container">
-                <input type="checkbox" checked={agreeTerms} onChange={e => setAgreeTerms(e.target.checked)} required/>
+                <input
+                  type="checkbox"
+                  checked={agreeTerms}
+                  onChange={(e) => setAgreeTerms(e.target.checked)}
+                  required
+                />
                 <span className="checkmark"></span>
-                Tôi đồng ý với <Link to="/terms" className="terms-link">Điều khoản sử dụng</Link>
+                Tôi đồng ý với{' '}
+                <Link to="/terms" className="terms-link">
+                  Điều khoản sử dụng
+                </Link>
               </label>
             </div>
 
-            <button type="submit" className="auth-button primary" disabled={isLoading || !agreeTerms}>
+            <button
+              type="submit"
+              className="auth-button primary"
+              disabled={isLoading || !agreeTerms}
+            >
               {isLoading ? 'Đang tạo tài khoản...' : 'Tạo tài khoản'}
             </button>
 
-            <div className="divider"><span>Hoặc</span></div>
-            <button type="button" className="auth-button google"><span className="google-icon">G</span>Đăng ký với Google</button>
+            <div className="divider">
+              <span>Hoặc</span>
+            </div>
+
+            <button type="button" className="auth-button google">
+              <span className="google-icon">G</span>Đăng ký với Google
+            </button>
 
             <div className="auth-switch">
-              <span>Đã có tài khoản? </span><Link to="/dang-nhap" className="auth-link">Đăng nhập ngay</Link>
+              <span>Đã có tài khoản? </span>
+              <Link to="/dang-nhap" className="auth-link">
+                Đăng nhập ngay
+              </Link>
             </div>
           </form>
         </div>

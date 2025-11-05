@@ -3,11 +3,27 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1761971728181,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762328144426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+<?php\n+\n+namespace App\\Models;\n+\n+use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n+use Laravel\\Sanctum\\HasApiTokens;\n+\n+class Admin extends Authenticatable\n+{\n+    use HasApiTokens;\n+\n+    protected $fillable = [\n+        'name',\n+        'email',\n+        'password',\n+    ];\n+\n+    protected $hidden = [\n+        'password',\n+        'remember_token',\n+    ];\n+\n+    // Tự động hash password khi tạo hoặc cập nhật\n+    public function setPasswordAttribute($value)\n+    {\n+        $this->attributes['password'] = bcrypt($value);\n+    }\n+}\n"
+                },
+                {
+                    "date": 1762328194665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+<?php\n+\n+namespace App\\Models;\n+\n+use Illuminate\\Foundation\\Auth\\User as Authenticatable; // dùng Authenticatable để auth\n+use Laravel\\Sanctum\\HasApiTokens; // dùng Sanctum tạo token\n+\n+class Admin extends Authenticatable\n+{\n+    use HasApiTokens;\n+\n+    protected $fillable = [\n+        'name',\n+        'email',\n+        'password',\n+    ];\n+\n+    protected $hidden = [\n+        'password', // không trả về password\n+    ];\n+}\n"
+                },
+                {
+                    "date": 1762328216262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+<?php\n+\n+namespace App\\Models;\n+\n+use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n+use Laravel\\Sanctum\\HasApiTokens;\n+\n+class Admin extends Authenticatable\n+{\n+    use HasApiTokens;\n+\n+    protected $fillable = [\n+        'name',\n+        'email',\n+        'password',\n+    ];\n+\n+    protected $hidden = [\n+        'password',\n+        'remember_token',\n+    ];\n+\n+    // Tự động hash password khi tạo hoặc cập nhật\n+    public function setPasswordAttribute($value)\n+    {\n+        $this->attributes['password'] = bcrypt($value);\n+    }\n+}\n"
+                },
+                {
+                    "date": 1762328531502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+<?php\n+\n+namespace App\\Models;\n+\n+use Illuminate\\Foundation\\Auth\\User as Authenticatable; // dùng Authenticatable để auth\n+use Laravel\\Sanctum\\HasApiTokens; // dùng Sanctum tạo token\n+\n+class Admin extends Authenticatable\n+{\n+    use HasApiTokens;\n+\n+    protected $fillable = [\n+        'name',\n+        'email',\n+        'password',\n+    ];\n+\n+    protected $hidden = [\n+        'password', // không trả về password\n+    ];\n+}\n"
                 }
             ],
             "date": 1761971728181,

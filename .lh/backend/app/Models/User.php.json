@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1761972480412,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762326187106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,44 +1,37 @@\n <?php\n \n namespace App\\Models;\n \n-// use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\n use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n use Illuminate\\Notifications\\Notifiable;\n use Laravel\\Sanctum\\HasApiTokens;\n \n-\n class User extends Authenticatable\n {\n     use HasApiTokens, HasFactory, Notifiable;\n \n     /**\n-     * The attributes that are mass assignable.\n-     *\n-     * @var array<int, string>\n+     * Các thuộc tính có thể gán hàng loạt.\n      */\n     protected $fillable = [\n         'name',\n         'email',\n         'password',\n+        'role', // ✅ thêm dòng này\n     ];\n \n     /**\n-     * The attributes that should be hidden for serialization.\n-     *\n-     * @var array<int, string>\n+     * Ẩn các thuộc tính khi trả về JSON.\n      */\n     protected $hidden = [\n         'password',\n         'remember_token',\n     ];\n \n     /**\n-     * The attributes that should be cast.\n-     *\n-     * @var array<string, string>\n+     * Ép kiểu các thuộc tính.\n      */\n     protected $casts = [\n         'email_verified_at' => 'datetime',\n         'password' => 'hashed',\n"
                 }
             ],
             "date": 1761972480412,

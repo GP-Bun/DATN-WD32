@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/database/migrations/2025_11_05_061658_create_product_variants_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762323656521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762324539380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,29 @@\n+<?php\n+\n+use Illuminate\\Database\\Migrations\\Migration;\n+use Illuminate\\Database\\Schema\\Blueprint;\n+use Illuminate\\Support\\Facades\\Schema;\n+\n+return new class extends Migration\n+{\n+    public function up(): void\n+    {\n+        Schema::create('product_variants', function (Blueprint $table) {\n+            $table->id();\n+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');\n+            $table->string('color')->nullable();\n+            $table->string('size')->nullable();\n+            $table->integer('stock')->default(0);\n+            $table->decimal('price', 15, 2)->nullable();\n+            $table->string('image')->nullable();\n+            $table->string('status')->default('active');\n+            $table->timestamps();\n+            $table->softDeletes();\n+        });\n+    }\n+\n+    public function down(): void\n+    {\n+        Schema::dropIfExists('product_variants');\n+    }\n+};\n"
+                }
+            ],
+            "date": 1762323656521,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('product_variants', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');\n            $table->string('variant_name'); // ví dụ: màu, size\n            $table->decimal('price', 10, 2)->nullable();\n            $table->integer('stock')->default(0);\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('product_variants');\n    }\n};\n"
+        }
+    ]
+}

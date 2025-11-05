@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/database/migrations/2025_11_05_061732_create_coupon_redemptions_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762323731686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762324593773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,12 +10,11 @@\n     {\n         Schema::create('coupon_redemptions', function (Blueprint $table) {\n             $table->id();\n             $table->foreignId('coupon_id')->constrained('coupons')->onDelete('cascade');\n-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n-            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('set null');\n-            $table->timestamp('redeemed_at')->useCurrent();\n-            $table->timestamps();\n+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');\n+            $table->timestamp('redeemed_at')->nullable();\n+            $table->decimal('discount_amount', 15, 2)->nullable();\n         });\n     }\n \n     public function down(): void\n"
+                }
+            ],
+            "date": 1762323731686,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('coupon_redemptions', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('coupon_id')->constrained('coupons')->onDelete('cascade');\n            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('set null');\n            $table->timestamp('redeemed_at')->useCurrent();\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('coupon_redemptions');\n    }\n};\n"
+        }
+    ]
+}

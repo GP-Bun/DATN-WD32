@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/database/migrations/2025_11_05_061710_create_orders_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762323698873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762324560222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,14 +10,17 @@\n     {\n         Schema::create('orders', function (Blueprint $table) {\n             $table->id();\n             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n-            $table->decimal('total_amount', 10, 2);\n-            $table->string('status')->default('pending');\n-            $table->string('payment_method')->nullable();\n-            $table->string('shipping_method')->nullable();\n-            $table->timestamp('ordered_at')->nullable();\n+            $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');\n+            $table->decimal('total_amount', 15, 2);\n+            $table->decimal('shipping_fee', 15, 2)->default(0);\n+            $table->decimal('discount_amount', 15, 2)->default(0);\n+            $table->decimal('final_amount', 15, 2);\n+            $table->string('order_status')->default('pending');\n+            $table->string('payment_status')->default('unpaid');\n             $table->timestamps();\n+            $table->softDeletes();\n         });\n     }\n \n     public function down(): void\n"
+                }
+            ],
+            "date": 1762323698873,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('orders', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n            $table->decimal('total_amount', 10, 2);\n            $table->string('status')->default('pending');\n            $table->string('payment_method')->nullable();\n            $table->string('shipping_method')->nullable();\n            $table->timestamp('ordered_at')->nullable();\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('orders');\n    }\n};\n"
+        }
+    ]
+}

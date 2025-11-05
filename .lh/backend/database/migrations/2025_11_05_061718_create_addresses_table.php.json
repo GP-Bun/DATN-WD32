@@ -1,0 +1,26 @@
+{
+    "sourceFile": "backend/database/migrations/2025_11_05_061718_create_addresses_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1762323713038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762324574367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,16 +10,17 @@\n     {\n         Schema::create('addresses', function (Blueprint $table) {\n             $table->id();\n             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n-            $table->string('full_name');\n-            $table->string('phone');\n+            $table->string('receiver_name');\n+            $table->string('receiver_phone');\n+            $table->string('line1');\n+            $table->string('city');\n             $table->string('province');\n-            $table->string('district');\n-            $table->string('ward');\n-            $table->string('address_detail');\n+            $table->string('zip')->nullable();\n             $table->boolean('is_default')->default(false);\n             $table->timestamps();\n+            $table->softDeletes();\n         });\n     }\n \n     public function down(): void\n"
+                },
+                {
+                    "date": 1762324663710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     public function up(): void\n     {\n         Schema::create('addresses', function (Blueprint $table) {\n             $table->id();\n-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n+            $table->foreignId('user_id')->constrained()->onDelete('cascade');\n             $table->string('receiver_name');\n             $table->string('receiver_phone');\n             $table->string('line1');\n             $table->string('city');\n"
+                }
+            ],
+            "date": 1762323713038,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('addresses', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');\n            $table->string('full_name');\n            $table->string('phone');\n            $table->string('province');\n            $table->string('district');\n            $table->string('ward');\n            $table->string('address_detail');\n            $table->boolean('is_default')->default(false);\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('addresses');\n    }\n};\n"
+        }
+    ]
+}

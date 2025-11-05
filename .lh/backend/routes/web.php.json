@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/routes/web.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762328269650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762328280638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+<?php\n+\n use App\\Http\\Controllers\\Admin\\AuthController;\n use App\\Http\\Controllers\\Admin\\AdminController;\n \n Route::prefix('admin')->group(function () {\n"
+                }
+            ],
+            "date": 1762328269650,
+            "name": "Commit-0",
+            "content": "use App\\Http\\Controllers\\Admin\\AuthController;\nuse App\\Http\\Controllers\\Admin\\AdminController;\n\nRoute::prefix('admin')->group(function () {\n\n    // Login/logout admin\n    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');\n    Route::post('/login', [AuthController::class, 'login']);\n    Route::post('/logout', [AuthController::class, 'logout']);\n\n    // Dashboard và các route admin khác → bảo vệ bằng middleware\n    Route::middleware(['admin.auth'])->group(function () {\n        Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');\n        // Thêm các route khác của admin ở đây\n    });\n});\n"
+        }
+    ]
+}

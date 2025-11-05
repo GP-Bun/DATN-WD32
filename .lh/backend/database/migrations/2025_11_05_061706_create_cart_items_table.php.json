@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/database/migrations/2025_11_05_061706_create_cart_items_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762323669881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762324552624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n         Schema::create('cart_items', function (Blueprint $table) {\n             $table->id();\n             $table->foreignId('cart_id')->constrained('carts')->onDelete('cascade');\n             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');\n+            $table->foreignId('variant_id')->nullable()->constrained('product_variants')->onDelete('cascade');\n             $table->integer('quantity')->default(1);\n-            $table->decimal('price', 10, 2);\n             $table->timestamps();\n         });\n     }\n \n"
+                }
+            ],
+            "date": 1762323669881,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('cart_items', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('cart_id')->constrained('carts')->onDelete('cascade');\n            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');\n            $table->integer('quantity')->default(1);\n            $table->decimal('price', 10, 2);\n            $table->timestamps();\n        });\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('cart_items');\n    }\n};\n"
+        }
+    ]
+}

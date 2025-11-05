@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/database/migrations/2025_10_23_153226_create_products_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1762323210574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1762323285809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,19 +8,18 @@\n {\n     public function up(): void\n     {\n         Schema::create('products', function (Blueprint $table) {\n-    $table->id();\n-    $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');\n-    $table->string('name');\n-    $table->text('description')->nullable();\n-    $table->decimal('price', 15, 2);\n-    $table->string('image')->nullable();\n-    $table->string('status')->default('active');\n-    $table->timestamps();\n-    $table->softDeletes();\n-});\n-\n+            $table->id();\n+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');\n+            $table->string('name');\n+            $table->text('description')->nullable();\n+            $table->decimal('price', 15, 2);\n+            $table->string('image')->nullable();\n+            $table->string('status')->default('active');\n+            $table->timestamps();\n+            $table->softDeletes();\n+        });\n     }\n \n     public function down(): void\n     {\n"
+                }
+            ],
+            "date": 1762323210574,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('products', function (Blueprint $table) {\n    $table->id();\n    $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');\n    $table->string('name');\n    $table->text('description')->nullable();\n    $table->decimal('price', 15, 2);\n    $table->string('image')->nullable();\n    $table->string('status')->default('active');\n    $table->timestamps();\n    $table->softDeletes();\n});\n\n    }\n\n    public function down(): void\n    {\n        Schema::dropIfExists('products');\n    }\n};\n"
+        }
+    ]
+}
