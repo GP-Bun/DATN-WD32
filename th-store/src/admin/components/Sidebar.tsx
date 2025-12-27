@@ -18,6 +18,7 @@ const Sidebar = () => {
           <NavLink
             key={item.path}
             to={item.path}
+            end={item.path === '/admin'}
             className={({ isActive }) =>
               `admin-nav-item ${isActive ? "active" : ""}`
             }
